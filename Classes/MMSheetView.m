@@ -131,9 +131,14 @@
         [self.cancelButton setBackgroundImage:[UIImage mm_imageWithColor:config.itemPressedColor] forState:UIControlStateHighlighted];
         [self.cancelButton setTitle:config.defaultTextCancel forState:UIControlStateNormal];
         [self.cancelButton setTitleColor:config.itemNormalColor forState:UIControlStateNormal];
-        
+        //适配iPhone x
+        CGFloat bottomInset = 0;
+        CGFloat barHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
+        if (barHeight > 40) {
+            bottomInset = 34;
+        }
         [self mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.cancelButton.mas_bottom);
+            make.bottom.equalTo(self.cancelButton.mas_bottom).offset(bottomInset);
         }];
         
     }
